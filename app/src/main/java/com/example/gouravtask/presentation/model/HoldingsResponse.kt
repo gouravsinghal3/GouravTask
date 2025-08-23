@@ -2,6 +2,7 @@ package com.example.gouravtask.presentation.model
 
 import androidx.room.PrimaryKey
 import com.example.gouravtask.data.db.entity.Holding
+import com.example.gouravtask.data.db.entity.NetworkHolding
 import com.google.gson.annotations.SerializedName
 
 // This class maps directly to the JSON structure from the API
@@ -12,7 +13,7 @@ data class HoldingsResponse(
 
 data class Data(
     @SerializedName("userHolding")
-    val userHolding: List<UiHolding>
+    val userHolding: List<NetworkHolding>
 )
 
 data class UiHolding(
@@ -23,16 +24,6 @@ data class UiHolding(
     val close: Double,
     val error: String?
 )
-
-fun UiHolding.toHolding(): Holding {
-    return Holding(
-        symbol = this.symbol,
-        quantity = this.quantity,
-        ltp = this.ltp,
-        avgPrice = this.avgPrice,
-        close = this.close
-    )
-}
 
 fun Holding.toUiHolding(): UiHolding {
     return UiHolding(

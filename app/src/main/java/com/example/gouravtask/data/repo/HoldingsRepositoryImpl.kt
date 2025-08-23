@@ -5,8 +5,8 @@ import com.example.gouravtask.domain.interfaces.HoldingsRepository
 import com.example.gouravtask.data.api.ApiService
 import com.example.gouravtask.data.db.HoldingsDao
 import com.example.gouravtask.data.db.entity.Holding
+import com.example.gouravtask.data.db.entity.toHolding
 import com.example.gouravtask.presentation.model.UiHolding
-import com.example.gouravtask.presentation.model.toHolding
 import com.example.gouravtask.presentation.model.toUiHolding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
