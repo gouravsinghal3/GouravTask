@@ -2,9 +2,9 @@ package com.example.gouravtask.data.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.gouravtask.data.db.HoldingsDao
 import com.example.gouravtask.data.api.ApiService
 import com.example.gouravtask.data.db.AppDatabase
+import com.example.gouravtask.data.db.HoldingsDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,49 +14,14 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.security.cert.X509Certificate
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
-import javax.net.ssl.SSLContext
-import javax.net.ssl.TrustManager
-import javax.net.ssl.X509TrustManager
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    @Singleton
-    fun provideTrustManager(): X509TrustManager {
-        return object : X509TrustManager {
-            override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {}
-            override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {}
-            override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
-        }
-    }
-
-    @Provides
-    @Singleton
-    fun provideSSLContext(trustManager: X509TrustManager): SSLContext {
-        val sslContext = SSLContext.getInstance("TLS")
-        sslContext.init(null, arrayOf<TrustManager>(trustManager), null)
-        return sslContext
-    }
-
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(
-        loggingInterceptor: HttpLoggingInterceptor,
-        sslContext: SSLContext,
-        trustManager: X509TrustManager
-    ): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .sslSocketFactory(sslContext.socketFactory, trustManager)
-            .hostnameVerifier { _, _ -> true } // Skip hostname verification
-            .build()
-    }
-
-    @Provides
+        @Provides
     @Singleton
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return HttpLoggingInterceptor().apply {
@@ -66,12 +31,29 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit =
-        Retrofit.Builder()
-            .baseUrl("https://35dee773a9ec441e9f38d5fc249406ce.api.mockbin.io")
+    fun provideOkHttpClient(
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .connectTimeout(30, TimeUnit.SECONDS)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(30, TimeUnit.SECONDS)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+        // Use HTTP for development, change to HTTPS for production
+        val baseUrl = "http://35dee773a9ec441e9f38d5fc249406ce.api.mockbin.io"
+        
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
 
     @Provides
     @Singleton

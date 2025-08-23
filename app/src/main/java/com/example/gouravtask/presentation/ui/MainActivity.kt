@@ -37,10 +37,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupStatusBar() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.BAKLAVA) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             // Tell system: we handle insets (edge-to-edge)
-            WindowCompat.setDecorFitsSystemWindows(window, false)
-            // Keep icons light (white) since background is dark
+            WindowCompat.setDecorFitsSystemWindows(window, false) // Keep icons light (white) since background is dark
             WindowInsetsControllerCompat(window, window.decorView)
                 .isAppearanceLightStatusBars = false
 

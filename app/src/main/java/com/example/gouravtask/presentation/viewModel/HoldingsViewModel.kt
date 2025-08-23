@@ -32,20 +32,16 @@ class HoldingsViewModel @Inject constructor(
     private var cachedHoldings = emptyList<UiHolding>()
     private var cachedSummary: PortfolioSummary? = null
     init {
-        Log.d("HoldingsViewModel", "ViewModel initialized, calling fetchHoldings()")
         fetchHoldings()
     }
 
     fun fetchHoldings() {
-        Log.d("HoldingsViewModel", "Starting fetchHoldings()")
         viewModelScope.launch {
             getHoldingsUseCase()
                 .onStart {
-                    Log.d("HoldingsRepositoryImpl_HoldingsViewModel", "Use case started, setting loading to true")
                     _uiState.update { it.copy(isLoading = true) }
                 }
                 .catch { e ->
-                    Log.e("HoldingsRepositoryImpl_HoldingsViewModel", "Error in use case: ${e.message}", e)
                     _uiState.update {
                         it.copy(error = "Failed to fetch holdings: ${e.message}", isLoading = false)
                     }

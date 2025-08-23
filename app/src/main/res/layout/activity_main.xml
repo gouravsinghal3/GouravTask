@@ -16,7 +16,7 @@
         <LinearLayout
             android:id="@+id/customActionBar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="@dimen/action_bar_padding_horizontal"

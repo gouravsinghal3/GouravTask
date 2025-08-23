@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.gouravtask"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -75,11 +75,27 @@ dependencies {
 
     // Testing
     testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
     testImplementation(libs.mockito.core)
     testImplementation(libs.androidx.arch.core.testing)
     testImplementation(libs.kotlinx.coroutines.test)
+
+    // Android Testing
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
+    
+    // Hilt Testing
+    // For Robolectric tests.
+    testImplementation (libs.hilt.android.testing)
+    // ...with Kotlin.
+    kaptAndroidTest(libs.hilt.compiler)
+    
+    // Robolectric
+    testImplementation("org.robolectric:robolectric:4.11.1")
+    
+    // MockK
+    testImplementation("io.mockk:mockk:1.13.8")
+    androidTestImplementation("io.mockk:mockk-android:1.13.8")
 }
 
 kapt {
