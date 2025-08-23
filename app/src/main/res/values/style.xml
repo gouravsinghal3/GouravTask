@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<style name="TopRoundedCardView" parent="Widget.MaterialComponents.CardView">
+    <item name="shapeAppearanceOverlay">@style/ShapeAppearance.App.TopRoundedCardView</item>
+</style>
+
+<style name="ShapeAppearance.App.TopRoundedCardView" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+<item name="cornerFamily">rounded</item>
+<item name="cornerSizeTopLeft">16dp</item>
+<item name="cornerSizeTopRight">16dp</item>
+<item name="cornerSizeBottomLeft">0dp</item>
+<item name="cornerSizeBottomRight">0dp</item>
+</style>
+
+
+    <style name="CustomTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">@dimen/text_size_title</item>
+        <item name="android:textColor">@color/blue_500</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

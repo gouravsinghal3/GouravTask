@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/TopRoundedCardView"
+    app:cardBackgroundColor="@color/bottom_sheet_bg_color"
+    android:elevation="@dimen/dimen_8dp">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <!-- Portfolio Summary Header -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTotalPnlLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:paddingBottom="@dimen/dimen_10dp"
+        android:text="@string/profit_loss"
+        android:textColor="@color/gray_500"
+        android:textSize="@dimen/text_size_title"
+        app:layout_constraintEnd_toStartOf="@+id/ivExpandCollapse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivExpandCollapse"
+        android:layout_width="@dimen/dimen_14dp"
+        android:layout_height="@dimen/dimen_14dp"
+        android:layout_marginEnd="@dimen/margin_medium"
+        android:contentDescription="@string/expand_collapse"
+        app:srcCompat="@drawable/pass_view_arrow_up"
+        android:layout_marginStart="@dimen/dimen_8dp"
+        android:layout_marginBottom="@dimen/dimen_10dp"
+        app:layout_constraintStart_toEndOf="@+id/tvTotalPnlLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvTotalPnlLabel"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTotalPnlLabel"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTotalPnl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_title"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:textStyle="bold"
+        android:gravity="end"
+        app:layout_constraintStart_toEndOf="@+id/ivExpandCollapse"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTotalPnlLabel" />
+
+
+
+    <!-- Clickable Header Area -->
+    <View
+        android:id="@+id/clickableHeaderArea"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/clickablearea"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTotalPnlLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!-- Divider - positioned relative to barrier -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dimen_1dp"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:background="@color/gray_200"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalPnlLabel" />
+
+    <!-- Total Investment Row -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTodaysPnlLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:text="@string/todays_pnl"
+        android:textColor="@color/gray_500"
+        android:textSize="@dimen/text_size_title"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/tvTodaysPnl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTodaysPnl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_title"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTodaysPnlLabel" />
+
+    <!-- Today's P&L Row -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTotalInvestmentLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:text="@string/total_investment"
+        android:textColor="@color/gray_500"
+        android:textSize="@dimen/text_size_title"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/tvTotalInvestment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTodaysPnlLabel" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvTotalInvestment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:textColor="@color/red_500"
+        android:textSize="@dimen/text_size_title"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvTotalInvestmentLabel" />
+
+    <!-- Total P&L Row -->
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCurrentValueLabel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_10dp"
+        android:layout_marginTop="@dimen/dimen_10dp"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:text="@string/current_value"
+        android:textColor="@color/gray_500"
+        android:textSize="@dimen/text_size_title"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tvTotalPnl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTotalInvestmentLabel" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvCurrentValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dimen_10dp"
+        android:textColor="@color/red_500"
+        android:textSize="@dimen/text_size_title"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCurrentValueLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvCurrentValueLabel" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

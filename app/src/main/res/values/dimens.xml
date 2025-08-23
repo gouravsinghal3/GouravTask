@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Action Bar Dimensions -->
+    <dimen name="action_bar_height">48dp</dimen>
+    <dimen name="action_bar_padding_horizontal">8dp</dimen>
+    <dimen name="action_bar_icon_size">24dp</dimen>
+    <dimen name="action_bar_title_icon_size">32dp</dimen>
+    <dimen name="action_bar_icon_margin">16dp</dimen>
+    <dimen name="action_bar_title_icon_margin">8dp</dimen>
+
+    <!-- Tab Layout Dimensions -->
+    <dimen name="tab_indicator_height">3dp</dimen>
+
+    <!-- Content Dimensions -->
+    <dimen name="content_padding_bottom">60dp</dimen>
+    <dimen name="progress_bar_margin">16dp</dimen>
+
+    <!-- Text Sizes -->
+    <dimen name="text_size_title">18sp</dimen>
+    <dimen name="text_size_body">14sp</dimen>
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_medium">16sp</dimen>
+
+
+    <dimen name="text_20sp">20sp</dimen>
+    <dimen name="text_21sp">21sp</dimen>
+    <dimen name="text_22sp">22sp</dimen>
+
+    <!-- Margins and Paddings -->
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+    <dimen name="dimen_8dp">8dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_18dp">18dp</dimen>
+    <dimen name="dimen_1dp">1dp</dimen>
+    <dimen name="dimen_14dp">14dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+</resources>

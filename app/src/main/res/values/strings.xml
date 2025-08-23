@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">GouravTask</string>
+    <string name="welcome_message">Welcome to Gourav Task</string>
+    <string name="open_main_activity">Open Main Activity</string>
+
+    <!-- Main Activity -->
+    <string name="portfolio_title">Portfolio</string>
+    <string name="tab_positions">POSITIONS</string>
+    <string name="tab_holdings">HOLDINGS</string>
+
+    <!-- Portfolio Summary -->
+    <string name="current_value">Current value*</string>
+    <string name="total_investment">Total investment*</string>
+    <string name="todays_pnl">Today\'s Profit &amp; Loss*</string>
+    <string name="profit_loss">Profit &amp; Loss*</string>
+
+    <!-- Sort Dialog -->
+    <string name="sort_holdings">Sort Holdings</string>
+    <string name="sort_alphabetically_az">Alphabetically (A-Z)</string>
+    <string name="sort_alphabetically_za">Alphabetically (Z-A)</string>
+    <string name="sort_by_quantity_high_low">By Quantity (High to Low)</string>
+    <string name="sort_by_quantity_low_high">By Quantity (Low to High)</string>
+    <string name="sort_by_pnl_high_low">By P&amp;L (High to Low)</string>
+    <string name="sort_by_pnl_low_high">By P&amp;L (Low to High)</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- Search Dialog -->
+    <string name="search_holdings">Search Holdings</string>
+    <string name="search_hint">Search holdings...</string>
+    <string name="search">Search</string>
+
+    <!-- Feedback Messages -->
+    <string name="sorted_az">Sorted A-Z</string>
+    <string name="sorted_za">Sorted Z-A</string>
+    <string name="found_holdings">Found %1$d holdings</string>
+    <string name="ClickableArea">clickableArea</string>
+    <string name="expand_collapse">Expand/Collapse</string>
+    <string name="SortButton">SortButton</string>
+    <string name="SearchButton">searchButton</string>
+
+    <string name="net_qty">NET QTY: </string>
+    <string name="ltp">LTP: </string>
+    <string name="profit_n_loss">P&amp;L: </string>
+</resources>
