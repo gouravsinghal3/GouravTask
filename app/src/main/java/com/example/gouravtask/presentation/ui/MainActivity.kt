@@ -37,16 +37,20 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupStatusBar() {
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             // Tell system: we handle insets (edge-to-edge)
-            WindowCompat.setDecorFitsSystemWindows(window, false) // Keep icons light (white) since background is dark
-            WindowInsetsControllerCompat(window, window.decorView)
-                .isAppearanceLightStatusBars = false
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            val windowInsetsController = WindowInsetsControllerCompat(window, window.decorView)
+            windowInsetsController.isAppearanceLightStatusBars = false
+            windowInsetsController.isAppearanceLightNavigationBars = false
 
-            // Push toolbar down below status bar
+            // Push toolbar down below status bar and adjust for navigation bar at the bottom
             ViewCompat.setOnApplyWindowInsetsListener(binding.customActionBar) { view, insets ->
                 val statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars())
+                val navBarInsets = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
                 view.updatePadding(top = statusBarInsets.top)
+                // If you want to pad your bottom-most view for the nav bar, do so too:
+                binding.root.updatePadding(bottom = navBarInsets.bottom)
                 insets
             }
         }
