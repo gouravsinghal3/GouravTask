@@ -9,14 +9,14 @@ import com.example.gouravtask.presentation.model.Data
 import com.example.gouravtask.presentation.model.UiHolding
 import com.example.gouravtask.presentation.model.toUiHolding
 import io.mockk.*
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.test.*
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -63,7 +63,9 @@ class HoldingsRepositoryImplTest {
         val emittedData = mutableListOf<List<UiHolding>>()
 
         result.take(2).collect {
-            emittedData.add(it)
+            if (it is com.example.gouravtask.presentation.model.HoldingsResponseState.Success) {
+                emittedData.add(it.holdings)
+            }
         }
 
         // Then
@@ -91,7 +93,9 @@ class HoldingsRepositoryImplTest {
         val emittedData = mutableListOf<List<UiHolding>>()
 
         result.take(3).collect {
-            emittedData.add(it)
+            if (it is com.example.gouravtask.presentation.model.HoldingsResponseState.Success) {
+                emittedData.add(it.holdings)
+            }
         }
 
         // Then
@@ -116,11 +120,13 @@ class HoldingsRepositoryImplTest {
         val emittedData = mutableListOf<List<UiHolding>>()
 
         result.take(2).collect {
-            emittedData.add(it)
+            if (it is com.example.gouravtask.presentation.model.HoldingsResponseState.Success) {
+                emittedData.add(it.holdings)
+            }
         }
 
         // Then
-        assertEquals(2, emittedData.size)
+        assertEquals(1, emittedData.size)
         assertEquals(cachedHoldings.map { it.toUiHolding() }, emittedData[0])
         // Should still emit cached data even after network error
     }
@@ -139,11 +145,13 @@ class HoldingsRepositoryImplTest {
         val emittedData = mutableListOf<List<UiHolding>>()
 
         result.take(2).collect {
-            emittedData.add(it)
+            if (it is com.example.gouravtask.presentation.model.HoldingsResponseState.Success) {
+                emittedData.add(it.holdings)
+            }
         }
 
         // Then
-        assertEquals(2, emittedData.size)
+        assertEquals(1, emittedData.size)
         // Should still emit cached data after HTTP error
     }
 
@@ -161,11 +169,13 @@ class HoldingsRepositoryImplTest {
         val emittedData = mutableListOf<List<UiHolding>>()
 
         result.take(2).collect {
-            emittedData.add(it)
+            if (it is com.example.gouravtask.presentation.model.HoldingsResponseState.Success) {
+                emittedData.add(it.holdings)
+            }
         }
 
         // Then
-        assertEquals(2, emittedData.size)
+        assertEquals(1, emittedData.size)
         // Should still emit cached data after timeout error
     }
 
@@ -183,11 +193,13 @@ class HoldingsRepositoryImplTest {
         val emittedData = mutableListOf<List<UiHolding>>()
 
         result.take(2).collect {
-            emittedData.add(it)
+            if (it is com.example.gouravtask.presentation.model.HoldingsResponseState.Success) {
+                emittedData.add(it.holdings)
+            }
         }
 
         // Then
-        assertEquals(2, emittedData.size)
+        assertEquals(1, emittedData.size)
         // Should still emit cached data after generic error
     }
 
@@ -214,7 +226,9 @@ class HoldingsRepositoryImplTest {
         val emittedData = mutableListOf<List<UiHolding>>()
 
         result.take(3).collect {
-            emittedData.add(it)
+            if (it is com.example.gouravtask.presentation.model.HoldingsResponseState.Success) {
+                emittedData.add(it.holdings)
+            }
         }
 
         // Then

@@ -1,7 +1,6 @@
 package com.example.gouravtask.domain.usecase
 
 
-import com.example.gouravtask.data.db.entity.Holding
 import com.example.gouravtask.presentation.model.PortfolioSummary
 import com.example.gouravtask.presentation.model.UiHolding
 import javax.inject.Inject

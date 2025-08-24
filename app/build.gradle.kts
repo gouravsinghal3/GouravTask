@@ -21,7 +21,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isShrinkResources = true
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -37,6 +38,16 @@ android {
     }
     buildFeatures {
         viewBinding = true
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/LICENSE.md"
+            excludes += "META-INF/LICENSE-notice.md"
+            excludes += "META-INF/DEPENDENCIES"
+            pickFirsts += "META-INF/LICENSE.md"
+        }
     }
 }
 
@@ -75,27 +86,19 @@ dependencies {
 
     // Testing
     testImplementation(libs.junit)
-
-    testImplementation(libs.mockito.core)
     testImplementation(libs.androidx.arch.core.testing)
     testImplementation(libs.kotlinx.coroutines.test)
-
-    // Android Testing
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
     
     // Hilt Testing
     // For Robolectric tests.
     testImplementation (libs.hilt.android.testing)
     // ...with Kotlin.
     kaptAndroidTest(libs.hilt.compiler)
-    
-    // Robolectric
-    testImplementation("org.robolectric:robolectric:4.11.1")
+
     
     // MockK
-    testImplementation("io.mockk:mockk:1.13.8")
-    androidTestImplementation("io.mockk:mockk-android:1.13.8")
+    testImplementation(libs.mockk)
+    androidTestImplementation(libs.mockk.android)
 }
 
 kapt {

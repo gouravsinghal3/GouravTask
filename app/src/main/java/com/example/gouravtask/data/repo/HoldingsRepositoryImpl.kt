@@ -6,6 +6,7 @@ import com.example.gouravtask.data.api.ApiService
 import com.example.gouravtask.data.db.HoldingsDao
 import com.example.gouravtask.data.db.entity.Holding
 import com.example.gouravtask.data.db.entity.toHolding
+import com.example.gouravtask.presentation.model.HoldingsResponseState
 import com.example.gouravtask.presentation.model.UiHolding
 import com.example.gouravtask.presentation.model.toUiHolding
 import kotlinx.coroutines.Dispatchers
@@ -25,12 +26,12 @@ class HoldingsRepositoryImpl @Inject constructor(
     private val holdingsDao: HoldingsDao
 ) : HoldingsRepository {
 
-    override fun getHoldings(): Flow<List<UiHolding>> = flow {
+    override fun getHoldings(): Flow<HoldingsResponseState> = flow {
         // Get current cached data first (non-blocking)
         val currentCachedHoldings = holdingsDao.getAllHoldings().first()
 
         // Emit current cached data immediately
-        emit(currentCachedHoldings.map { it.toUiHolding() })
+        emit(HoldingsResponseState.Success(currentCachedHoldings.map { it.toUiHolding() }))
 
         // Then, try to fetch from network
         try {
@@ -42,31 +43,24 @@ class HoldingsRepositoryImpl @Inject constructor(
 
         } catch (e: Exception) {
             when (e) {
-//                is UnknownHostException -> Log.e(
-//                    "HoldingsRepositoryImpl",
-//                    "Network error: No internet connection or host not found"
-//                )
+                is UnknownHostException ->  emit(HoldingsResponseState.Error("Network error: No internet connection or host not found"))
 
-//                is SocketTimeoutException -> Log.e(
-//                    "HoldingsRepositoryImpl",
-//                    "Network error: Request timeout"
-//                )
+                is SocketTimeoutException -> emit(HoldingsResponseState.Error("Network error: Request timeout"))
 
-//                is HttpException -> Log.e(
-//                    "HoldingsRepositoryImpl",
-//                    "HTTP error: ${e.code()} - ${e.message()}"
-//                )
-
-//                else ->{} Log.e("HoldingsRepositoryImpl", "Other error: ${e.message}")
+                else -> {
+                    emit(HoldingsResponseState.Error(e.message ?: "Something went wrong. Try after sometime."))
+                }
             }
 
-            // Network error, we'll continue with cached data
+            return@flow
         }
 
         // Now emit the database flow for future updates
         emitAll(holdingsDao.getAllHoldings().map { holdingList ->
-            holdingList.map { it.toUiHolding() } 
+            HoldingsResponseState.Success(
+                holdingList.map { it.toUiHolding() }
+            )
         })
-
     }.flowOn(Dispatchers.IO)
+
 }

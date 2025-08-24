@@ -71,20 +71,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupTabs() {
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                // Handle tab selection
-                when (tab?.position) {
-                    0 -> {
-                        // POSITIONS tab selected
-                        Log.d("MainActivity", "Positions tab selected")
-                    }
-                    1 -> {
-                        // HOLDINGS tab selected
-                        Log.d("MainActivity", "Holdings tab selected")
-                    }
-                }
-            }
-
+            override fun onTabSelected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })

@@ -6,6 +6,12 @@ import com.example.gouravtask.data.db.entity.NetworkHolding
 import com.google.gson.annotations.SerializedName
 
 // This class maps directly to the JSON structure from the API
+
+
+sealed class HoldingsResponseState {
+       data class Success(val holdings: List<UiHolding>) : HoldingsResponseState()
+       data class Error(val message: String) : HoldingsResponseState()
+}
 data class HoldingsResponse(
     @SerializedName("data")
     val data: Data
@@ -17,12 +23,12 @@ data class Data(
 )
 
 data class UiHolding(
-    val symbol: String,
-    val quantity: Int,
-    val ltp: Double,
-    val avgPrice: Double,
-    val close: Double,
-    val error: String?
+    val symbol: String = "",
+    val quantity: Int = 0,
+    val ltp: Double = 0.0,
+    val avgPrice: Double = 0.0,
+    val close: Double = 0.0,
+    val error: String? = null
 )
 
 fun Holding.toUiHolding(): UiHolding {

@@ -2,6 +2,7 @@ package com.example.gouravtask.presentation.viewModel
 
 import com.example.gouravtask.domain.usecase.CalculatePortfolioSummaryUseCase
 import com.example.gouravtask.domain.usecase.GetHoldingsUseCase
+import com.example.gouravtask.presentation.model.HoldingsResponseState
 import com.example.gouravtask.presentation.model.PortfolioSummary
 import com.example.gouravtask.presentation.model.UiHolding
 import io.mockk.*
@@ -39,7 +40,13 @@ class HoldingsViewModelTest {
     @Test
     fun `init should call fetchHoldings`() = runTest {
         // Given
-        every { mockGetHoldingsUseCase() } returns flow { emit(emptyList()) }
+        every { mockGetHoldingsUseCase() } returns flow {
+            emit(
+                HoldingsResponseState.Success(
+                    emptyList()
+                )
+            )
+        }
 
         // When
         HoldingsViewModel(mockGetHoldingsUseCase, mockCalculatePortfolioSummaryUseCase)
@@ -51,7 +58,13 @@ class HoldingsViewModelTest {
     @Test
     fun `fetchHoldings should set loading to true initially`() = runTest {
         // Given
-        every { mockGetHoldingsUseCase() } returns flow { emit(emptyList()) }
+        every { mockGetHoldingsUseCase() } returns flow {
+            emit(
+                HoldingsResponseState.Success(
+                    emptyList()
+                )
+            )
+        }
 
         // When
         viewModel.fetchHoldings()
@@ -75,7 +88,13 @@ class HoldingsViewModelTest {
             totalPnl = 500.0
         )
 
-        every { mockGetHoldingsUseCase() } returns flow { emit(testHoldings) }
+        every { mockGetHoldingsUseCase() } returns flow {
+            emit(
+                HoldingsResponseState.Success(
+                    testHoldings
+                )
+            )
+        }
         every { mockCalculatePortfolioSummaryUseCase(testHoldings) } returns testSummary
 
         // When

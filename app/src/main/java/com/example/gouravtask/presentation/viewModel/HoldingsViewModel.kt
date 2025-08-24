@@ -1,11 +1,13 @@
 package com.example.gouravtask.presentation.viewModel
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.gouravtask.data.db.entity.Holding
 import com.example.gouravtask.domain.usecase.CalculatePortfolioSummaryUseCase
 import com.example.gouravtask.domain.usecase.GetHoldingsUseCase
+import com.example.gouravtask.presentation.model.HoldingsResponseState
 import com.example.gouravtask.presentation.model.HoldingsUiState
 import com.example.gouravtask.presentation.model.PortfolioSummary
 import com.example.gouravtask.presentation.model.UiHolding
@@ -46,20 +48,36 @@ class HoldingsViewModel @Inject constructor(
                         it.copy(error = "Failed to fetch holdings: ${e.message}", isLoading = false)
                     }
                 }
-                .collect { holdings ->
-                    // Only recalculate if data changed
-                    if (holdings != cachedHoldings) {
-                        cachedHoldings = holdings
-                        cachedSummary = calculatePortfolioSummaryUseCase(holdings)
+                .collect { state ->
 
-                        _uiState.update {
-                            it.copy(
-                                holdings = holdings,
-                                portfolioSummary = cachedSummary,
-                                isLoading = false
-                            )
-                        }
+                    when(state){
+
+                       is HoldingsResponseState.Success -> {
+                           // Only recalculate if data changed
+                           if (state.holdings != cachedHoldings) {
+                               cachedHoldings = state.holdings
+                               cachedSummary = calculatePortfolioSummaryUseCase(state.holdings)
+
+                               _uiState.update {
+                                   it.copy(
+                                       holdings = state.holdings,
+                                       portfolioSummary = cachedSummary,
+                                       isLoading = false
+                                   )
+                               }
+                           }
+                       }
+
+                       is HoldingsResponseState.Error -> {
+                           _uiState.update {
+                               it.copy(
+                                   error = state.message,
+                                   isLoading = false
+                               )
+                           }
+                       }
                     }
+
                 }
         }
     }
