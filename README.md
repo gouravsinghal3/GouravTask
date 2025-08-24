@@ -9,58 +9,13 @@
 
 **PROJECT STRUCTURE**
 
-app/
-├── src/
-│   ├── main/
-│   │   ├── java/com/example/gouravtask/
-│   │   │   ├── data/
-│   │   │   │   ├── api/           # API interfaces and models
-│   │   │   │   ├── db/            # Room database and DAOs
-│   │   │   │   ├── di/            # Dependency injection modules
-│   │   │   │   └── repo/          # Repository implementations
-│   │   │   ├── domain/
-│   │   │   │   ├── interfaces/    # Repository interfaces
-│   │   │   │   └── usecase/       # Business logic use cases
-│   │   │   ├── presentation/
-│   │   │   │   ├── ui/            # Activities and adapters
-│   │   │   │   ├── viewmodel/     # ViewModels
-│   │   │   │   └── model/         # UI models and states
-│   │   │   └── utils/             # Utility classes and extensions
-│   │   ├── res/                   # Resources (layouts, strings, drawables)
-│   │   └── AndroidManifest.xml
-│   └── test/                      # Unit tests
-└── build.gradle.kts
+<img width="588" height="426" alt="Screenshot 2025-08-24 at 11 09 10 PM" src="https://github.com/user-attachments/assets/e9173f8a-e1e3-42fe-8039-873959c92d6f" />
+
 
 **Technology Stack**
 
-Frontend (Android)
-├── Kotlin
-├── XML Layouts
-├── Material Design 3
-└── ViewBinding
+<img width="218" height="561" alt="Screenshot 2025-08-24 at 11 09 30 PM" src="https://github.com/user-attachments/assets/baf4b54e-4ae2-450a-bc26-e9c63cca9fab" />
 
-Architecture
-├── MVVM Pattern
-├── Repository Pattern
-├── Use Case Pattern
-└── Clean Architecture
-
-Backend Integration
-├── RESTful API
-├── Retrofit + OkHttp
-├── JSON Data Format
-
-
-Local Storage
-├── Room Database
-├── SQLite
-├── Data Caching
-└── Offline Support
-
-Dependency Injection
-├── Hilt
-├── Singleton Components
-└── Module-based Architecture
 
 **Design Pattern**
 MVVM (Model-View-ViewModel): Clean separation of concerns
@@ -69,31 +24,7 @@ Use Case Pattern: Business logic encapsulation
 
 📊 **API Documentation**
 
+
 **Get Holdings**
 
-http
-GET /holdings
-
-**Response** 
-{
-  "data": {
-    "userHolding": [
-      {
-        "symbol": "AAPL",
-        "quantity": 100,
-        "ltp": 150.0,
-        "avgPrice": 140.0,
-        "close": 145.0
-      }
-    ]
-  }
-}
-
-**Data Model**
-data class NetworkHolding(
-    val symbol: String,      // Stock symbol
-    val quantity: Int,       // Number of shares
-    val ltp: Double,         // Last traded price
-    val avgPrice: Double,    // Average purchase price
-    val close: Double,       // Previous closing price
-)
+<img width="413" height="559" alt="Screenshot 2025-08-24 at 11 09 47 PM" src="https://github.com/user-attachments/assets/c899c082-4345-4952-9644-a68762907579" />
