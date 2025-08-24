@@ -42,22 +42,7 @@ fun Context.getDimensionSp(dimenRes: Float): Int {
 }
 
 fun TextView.setFormattedAmount(amount: Double, isForPnl: Boolean = false) {
-    val indiaLocale = Locale.Builder()
-        .setLanguage("en")
-        .setRegion("IN")
-        .build()
-
-    val currencyFormatter = NumberFormat.getCurrencyInstance(indiaLocale)
-    val formattedAmount = when {
-        amount == 0.0 -> currencyFormatter.format(0.0)
-        amount < 0 -> {
-            val prefix = if (isForPnl) "-" else ""
-            prefix + currencyFormatter.format(kotlin.math.abs(amount))
-        }
-        else -> currencyFormatter.format(amount)
-    }
-    
-    this.text = formattedAmount
+    this.text = HelperUtils.getFormattedAmount(amount = amount, isForPnl = isForPnl)
     
     // Set text color based on amount and isNegative flag
     var textColor =  ContextCompat.getColor(context, R.color.black)
@@ -67,36 +52,6 @@ fun TextView.setFormattedAmount(amount: Double, isForPnl: Boolean = false) {
             amount < 0 -> ContextCompat.getColor(context, R.color.red_500)
             else -> ContextCompat.getColor(context, R.color.black)
         }
-    }
-    
-    this.setTextColor(textColor)
-}
-
-/**
- * Extension function for simple amount formatting without color changes
- */
-fun TextView.setSimpleAmount(amount: String) {
-    this.text = "₹${String.format("%.2f", amount)}"
-    this.setTextColor(ContextCompat.getColor(context, R.color.black))
-}
-
-/**
- * Extension function specifically for P&L values with color coding
- */
-fun TextView.setPnlAmount(amount: Double) {
-    val formattedAmount = when {
-        amount == 0.0 -> "₹0.00"
-        amount > 0 -> "+₹${String.format("%.2f", amount)}"
-        else -> "-₹${String.format("%.2f", kotlin.math.abs(amount))}"
-    }
-    
-    this.text = formattedAmount
-    
-    // Set text color based on P&L value
-    val textColor = when {
-        amount > 0 -> ContextCompat.getColor(context, R.color.green_500)
-        amount < 0 -> ContextCompat.getColor(context, R.color.red_500)
-        else -> ContextCompat.getColor(context, R.color.black)
     }
     
     this.setTextColor(textColor)
